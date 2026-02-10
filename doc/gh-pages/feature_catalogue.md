@@ -9,7 +9,7 @@ nav_order: 6
 
 ### MNE Scan
 
-* Connect to the following hardware devices and receive data in real-time: MEGIN MEG (via Fieldtrip Buffer), BabyMEG, Natus, BrainAmp, EegoSports, gUSBAmp, TMSI EEG Refa, BrainFlow, LSL.
+* Connect to the following hardware devices and receive data in real-time: MEGIN MEG (via Fieldtrip Buffer), BabyMEG, Natus, BrainAmp, EegoSports, gUSBAmp, TMSI EEG Refa, LSL.
 
 * Stream pre-recorded FIFF data and pipe the data to subsequent connected processing steps.
 
