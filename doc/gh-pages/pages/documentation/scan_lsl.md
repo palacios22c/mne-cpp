@@ -6,34 +6,25 @@ nav_order: 12
 ---
 # Lab Streaming Layer (LSL)
 
-This plugin adds support for LSL data streams to MNE Scan. For more information about the LSL project please see:
+This plugin adds support for LSL data streams to MNE Scan. MNE-CPP includes a self-contained LSL library under `src/libraries/lsl` that implements the core LSL protocol (stream discovery via UDP multicast, data transport via TCP), eliminating the need for any external dependency.
+
+For more information about the original LSL project please see:
 
 * [LSL on Github](https://github.com/sccn/labstreaminglayer){:target="_blank" rel="noopener"}
-* [Building the LSL library from source](https://labstreaminglayer.readthedocs.io/dev/lib_dev.html#building-liblsl){:target="_blank" rel="noopener"}
 
-## Compilation of the LSL Submodule
+## Building the LSL Plugin
 
-Make sure that you have the LSL git submodule by typing:
-
-```
-git submodule update --init applications\mne_scan\plugins\lsladapter\liblsl
-```
-
-Build it as a regular Cmake project. For MSVC you need to ensure that you use exactly the same Cmake generator as for MNE-CPP. For compilation with MSVC 2015 on a 64bit system do:
+The LSL plugin is an optional component controlled by the CMake option `WITH_LSL`. To enable it, configure with:
 
 ```
-cd mne-cpp\applications\mne_scan\plugins\lsladapter\liblsl\
-mkdir build
-cd build
-cmake .. -G "Visual Studio 14 2015 Win64"
-cmake --build . --config Release --target install
+cmake -B build -S src -DWITH_LSL=ON
+cmake --build build
 ```
 
-For a MSVC 2017 build you need to use `Visual Studio 15 2017 Win64` instead.
+No external submodule or library is required — the built-in `mne_lsl` library provides all necessary LSL functionality.
 
 ## LSL Plugin Setup
 
-* After the steps above make sure that you use the `MNECPP_CONFIG` flag `withLsl`. You can also set the flag manually in the [mne-cpp.pri file](https://github.com/mne-tools/mne-cpp/blob/main/mne-cpp.pri#L135){:target="_blank" rel="noopener"}.
+* Make sure the `WITH_LSL` CMake option is enabled when configuring the build.
 * Build MNE Scan.
-* LSL has a dynamic library which must be in your search path before you run MNE Scan. You need to copy `lsl.dll` from `mne-cpp\applications\mne_scan\plugins\lsladapter\liblsl\install\bin` to your executable folder `mne-cpp\out\Release\apps`.
-* Start MNE Scan
+* Start MNE Scan — the LSL adapter plugin will be available in the sensor plugins list.
