@@ -83,7 +83,7 @@ For more build options and how to set them, run:
 
 Alternatively, you can manually run:
 ```
-cmake -B build -S src -DCMAKE_BUILD_TYPE=Release
+cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ```
 
